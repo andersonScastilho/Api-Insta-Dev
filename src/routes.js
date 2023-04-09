@@ -12,12 +12,11 @@ const AuthSchema = require('./schema/Auth.Schema.json');
 const routes = new Router();
 
 routes.post('/users', SchemaValidator(UserSchema), UserController.store);
+
 routes.post('/auth', SchemaValidator(AuthSchema), AuthenticationController.store);
 
 routes.use(AuthenticationMiddleware);
 
-routes.get('/teste', async (req, res) => {
-  res.json({ ok: true });
-});
+routes.put('/users', SchemaValidator(UserSchema), UserController.update);
 
 module.exports = routes;
