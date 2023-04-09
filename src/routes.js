@@ -17,6 +17,7 @@ routes.post('/auth', SchemaValidator(AuthSchema), AuthenticationController.store
 
 routes.use(AuthenticationMiddleware);
 
-routes.put('/users', SchemaValidator(UserSchema), UserController.update);
+routes.put('/users', UserController.update);
+routes.delete('/users', UserController.delete);
 
 module.exports = routes;
