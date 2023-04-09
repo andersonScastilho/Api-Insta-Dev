@@ -35,9 +35,9 @@ class AuthenticationController {
 
     const { iv, content } = encrypt(id);
 
-    const newId = `${iv}:${content}`;
+    const userId = `${iv}:${content}`;
 
-    const token = jwt.sign({ newId }, process.env.HASH_BCRYPT, { expiresIn: `${process.env.EXPIRE_IN}` });
+    const token = jwt.sign({ userId }, process.env.HASH_BCRYPT, { expiresIn: `${process.env.EXPIRE_IN}` });
 
     return res.status(200).json({ user: { id, user_name: username }, token });
   }

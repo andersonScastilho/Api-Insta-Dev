@@ -17,6 +17,7 @@ class UserController {
         message: 'User already exist!',
       });
     }
+
     const user = await User.create({
       name, user_name, email, avatar, bio, gender, password,
     });
