@@ -1,0 +1,22 @@
+{
+  "name": "Api-Insta-dev",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "sequelize": "^6.30.0"
+  },
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
+  "devDependencies": {
+    "eslint": "^8.38.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "nodemon": "^2.0.22",
+    "sequelize-cli": "^6.6.0",
+    "sucrase": "^3.31.0"
+  }
+}
