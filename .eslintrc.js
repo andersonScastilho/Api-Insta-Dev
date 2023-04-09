@@ -16,5 +16,6 @@ module.exports = {
     'linebreak-style': 'off',
     'import/no-extraneous-dependencies': 'off',
     'class-methods-use-this': 'off',
+    'no-restricted-syntax': 'off',
   },
 };
