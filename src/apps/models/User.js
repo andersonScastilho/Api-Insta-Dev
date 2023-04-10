@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const { Model } = require('sequelize');
+
 const bcryptjs = require('bcryptjs');
 
 class User extends Model {
