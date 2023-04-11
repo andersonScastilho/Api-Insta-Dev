@@ -87,5 +87,32 @@ class PostController {
       message: "Post updated",
     });
   }
+  async show(req, res) {
+    const currentUserPosts = await Post.findAll({
+      where: {
+        author_id: req.userId,
+      },
+    });
+
+    if (!currentUserPosts.length) {
+      return res.status(400).json({
+        error: "Failed to list all posts",
+      });
+    }
+    const formattedData = [];
+
+    for (const item of currentUserPosts) {
+      formattedData.push({
+        id: item.id,
+        image: item.image,
+        description: item.description,
+        number_likes: item.number_likes,
+      });
+    }
+
+    return res.status(200).json({
+      data: formattedData,
+    });
+  }
 }
 module.exports = new PostController();
