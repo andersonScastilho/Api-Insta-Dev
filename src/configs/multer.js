@@ -5,7 +5,7 @@ const updload = multer({
   storage: multer.diskStorage({
     destination: 'uploads/',
     filename(req, file, callback) {
-      const filename = `${v4()}-${file.originalname}}`;
+      const filename = `${v4()}-${file.originalname}`;
       return callback(null, filename);
     },
 
