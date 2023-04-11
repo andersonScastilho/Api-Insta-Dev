@@ -1,4 +1,5 @@
-const Post = require("../models/Post");
+const Post = require('../models/Post');
+const User = require('../models/User');
 
 class PostController {
   async store(req, res) {
@@ -11,7 +12,7 @@ class PostController {
     });
 
     if (!newPost) {
-      return res.status(400).json({ error: "Created post failed!" });
+      return res.status(400).json({ error: 'Created post failed!' });
     }
 
     return res.status(200).json({
@@ -19,6 +20,7 @@ class PostController {
       description,
     });
   }
+
   async delete(req, res) {
     const { id } = req.id;
 
@@ -28,7 +30,7 @@ class PostController {
 
     if (!post) {
       return res.status(404).json({
-        error: "Post not exists!",
+        error: 'Post not exists!',
       });
     }
     if (post.author_id !== +req.userId) {
@@ -45,12 +47,13 @@ class PostController {
 
     if (!deletedPost) {
       return res.status(400).json({
-        error: "Failed to delete this post!",
+        error: 'Failed to delete this post!',
       });
     }
 
-    return res.status(200).json({ message: "Post deleted" });
+    return res.status(200).json({ message: 'Post deleted' });
   }
+
   async update(req, res) {
     const { id } = req.params;
     const { image, description } = req.body;
@@ -59,13 +62,13 @@ class PostController {
 
     if (!post) {
       return res.status(404).json({
-        error: "Post not exists!",
+        error: 'Post not exists!',
       });
     }
 
     if (post.author_id !== +req.userId) {
       return res.status(401).json({
-        error: "You dont\t permission to delete this post!",
+        error: 'You dont\t permission to delete this post!',
       });
     }
 
@@ -75,18 +78,19 @@ class PostController {
         where: {
           id,
         },
-      }
+      },
     );
     if (!postUpdated) {
       return res.status(400).json({
-        error: "Failed to update this post!",
+        error: 'Failed to update this post!',
       });
     }
 
     return res.status(200).json({
-      message: "Post updated",
+      message: 'Post updated',
     });
   }
+
   async show(req, res) {
     const currentUserPosts = await Post.findAll({
       where: {
@@ -96,7 +100,7 @@ class PostController {
 
     if (!currentUserPosts.length) {
       return res.status(400).json({
-        error: "Failed to list all posts",
+        error: 'Failed to list all posts',
       });
     }
     const formattedData = [];
@@ -112,6 +116,24 @@ class PostController {
 
     return res.status(200).json({
       data: formattedData,
+    });
+  }
+
+  async listAllPost(req, res) {
+    const allPosts = await Post.findAll({
+      attributes: ['id', 'description', 'image', 'number_likes'],
+      include: [
+        {
+          model: User,
+          as: 'user',
+          required: true,
+          attributes: ['user_name', 'id'],
+        },
+      ],
+    });
+
+    return res.status(200).json({
+      data: allPosts,
     });
   }
 }
