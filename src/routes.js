@@ -37,11 +37,11 @@ routes.get('/user-profile', UserController.index);
 routes.post('/upload', updload.single('image'), FileController.upload);
 
 // Posts
-routes.post('/post', SchemaValidator(PostSchema), PostController.store);
-routes.delete('/post/:id', PostController.delete);
-routes.put('/post/:id', PostController.update);
-routes.get('/my-posts', PostController.show);
-routes.get('/post', PostController.listAllPost);
+routes.post('/posts', SchemaValidator(PostSchema), PostController.store);
+routes.delete('/posts/:id', PostController.delete);
+routes.put('/posts/:id', PostController.update);
+routes.get('/posts/my-posts', PostController.show);
+routes.get('/posts', PostController.listAllPost);
 
 // Likes
 routes.put('/like/:id', LikeController.store);
