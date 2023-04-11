@@ -93,6 +93,9 @@ class PostController {
 
   async show(req, res) {
     const currentUserPosts = await Post.findAll({
+      order: [
+        ['id', 'DESC'],
+      ],
       where: {
         author_id: req.userId,
       },
@@ -121,6 +124,9 @@ class PostController {
 
   async listAllPost(req, res) {
     const allPosts = await Post.findAll({
+      order: [
+        ['id', 'DESC'],
+      ],
       attributes: ['id', 'description', 'image', 'number_likes'],
       include: [
         {
