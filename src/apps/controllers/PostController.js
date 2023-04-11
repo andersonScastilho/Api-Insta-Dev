@@ -22,9 +22,9 @@ class PostController {
   }
 
   async delete(req, res) {
-    const { id } = req.id;
+    const { id } = req.params;
 
-    const post = Post.findOne({
+    const post = await Post.findOne({
       where: { id },
     });
 
@@ -58,7 +58,7 @@ class PostController {
     const { id } = req.params;
     const { image, description } = req.body;
 
-    const post = await Post.findOne({ where: id });
+    const post = await Post.findOne({ where: { id } });
 
     if (!post) {
       return res.status(404).json({

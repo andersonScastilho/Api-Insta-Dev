@@ -1,4 +1,4 @@
-const Post = require("../models/Post");
+const Post = require('../models/Post');
 
 class LikeController {
   async store(req, res) {
@@ -9,8 +9,8 @@ class LikeController {
     });
 
     if (!post) {
-      return res.staust(400).json({
-        error: "Post not exists!",
+      return res.status(400).json({
+        error: 'Post not exists!',
       });
     }
 
@@ -20,16 +20,16 @@ class LikeController {
         where: {
           id,
         },
-      }
+      },
     );
     if (!postUpdatedLikes) {
       return res.status(400).json({
-        error: "Failed to add like in this post",
+        error: 'Failed to add like in this post',
       });
     }
 
     return res.status(200).json({
-      message: "Like storaged!",
+      message: 'Like storaged!',
     });
   }
 }
