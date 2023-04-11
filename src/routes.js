@@ -17,7 +17,7 @@ const LikeController = require('./apps/controllers/LikeController');
 const routes = new Router();
 
 // User - Create
-routes.post('/users', SchemaValidator(UserSchema), UserController.store);
+routes.post('/user', SchemaValidator(UserSchema), UserController.store);
 
 // Token - Login
 routes.post(
@@ -29,9 +29,9 @@ routes.post(
 routes.use(AuthenticationMiddleware);
 
 // User
-routes.put('/users', UserController.update);
-routes.delete('/users', UserController.delete);
-routes.get('/user-profile', UserController.index);
+routes.put('/user', UserController.update);
+routes.delete('/user', UserController.delete);
+routes.get('/user', UserController.index);
 
 // Updload
 routes.post('/upload', updload.single('image'), FileController.upload);
@@ -44,6 +44,6 @@ routes.get('/posts/my-posts', PostController.show);
 routes.get('/posts', PostController.listAllPost);
 
 // Likes
-routes.put('/like/:id', LikeController.store);
+routes.put('/likes/:id', LikeController.store);
 
 module.exports = routes;
