@@ -12,6 +12,7 @@ const AuthenticationController = require("./apps/controllers/AuthenticationContr
 const UserController = require("./apps/controllers/UserController");
 const FileController = require("./apps/controllers/FileController");
 const PostController = require("./apps/controllers/PostController");
+const LikeController = require("./apps/controllers/LikeController");
 
 const routes = new Router();
 
@@ -34,5 +35,7 @@ routes.post("/upload", updload.single("image"), FileController.upload);
 routes.post("/post", SchemaValidator(PostSchema), PostController.store);
 routes.delete("/post/:id", PostController.delete);
 routes.put("/post/:id", PostController.update);
+
+routes.put("/like/:id", LikeController.store);
 
 module.exports = routes;
