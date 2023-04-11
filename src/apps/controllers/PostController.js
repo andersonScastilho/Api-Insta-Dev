@@ -51,5 +51,41 @@ class PostController {
 
     return res.status(200).json({ message: "Post deleted" });
   }
+  async update(req, res) {
+    const { id } = req.params;
+    const { image, description } = req.body;
+
+    const post = await Post.findOne({ where: id });
+
+    if (!post) {
+      return res.status(404).json({
+        error: "Post not exists!",
+      });
+    }
+
+    if (post.author_id !== +req.userId) {
+      return res.status(401).json({
+        error: "You dont\t permission to delete this post!",
+      });
+    }
+
+    const postUpdated = await Post.update(
+      { image, description },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+    if (!postUpdated) {
+      return res.status(400).json({
+        error: "Failed to update this post!",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Post updated",
+    });
+  }
 }
 module.exports = new PostController();
