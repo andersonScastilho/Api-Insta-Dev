@@ -22,7 +22,7 @@ class PostController {
   async delete(req, res) {
     const { id } = req.id;
 
-    const post = Post.find({
+    const post = Post.findOne({
       where: { id },
     });
 
@@ -31,7 +31,7 @@ class PostController {
         error: "Post not exists!",
       });
     }
-    if (post.author_id !== req.userId) {
+    if (post.author_id !== +req.userId) {
       return res.status(401).json({
         error: "You dont't have permission to delete this post!",
       });
